@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"encoding/json"
+	"grove/app"
 	"log"
 	"os"
 
@@ -10,14 +11,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-type GroveConfig struct {
-	GroveURL string `json:"groveURL"`
-}
 
-type GrovePackage interface {
-	Version() string
-	License() string
-}
+
+
 
 var rootCmd = &cobra.Command{
 	Use:   "grove",
@@ -36,9 +32,8 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.AddCommand(plant)
-	rootCmd.AddCommand(browse)
-	plant.Flags().StringVar(&on, "on", "localhost", "target for grove to plant a seed")
+	rootCmd.AddCommand(install, browse, create, serve)
+	install.Flags().StringVar(&on, "on", "localhost", "target for grove to plant a seed")
 
 }
 // initConfig creates Grove's app directory in ~/.grove. 
@@ -60,7 +55,7 @@ func initConfig() {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired
 			
-			cf, err := json.MarshalIndent(GroveConfig{},"", "    ")
+			cf, err := json.MarshalIndent(app.DefaultGroveConfig(),"", "    ")
 			if err != nil {
 				log.Panic(err)
 			}

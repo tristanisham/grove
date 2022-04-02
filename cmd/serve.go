@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -15,3 +14,4 @@ var serve *cobra.Command = &cobra.Command{
 		fmt.Println("Work in progress...")
 	},
 }
+

@@ -3,6 +3,7 @@ package app
 
 type groveConfig struct {
 	GroveURL string `json:"groveURL"`
+	Server groveServerConfig `json:"server"`
 }
 
 type groveServerConfig struct {

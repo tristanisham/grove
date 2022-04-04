@@ -27,7 +27,7 @@ var browse *cobra.Command = &cobra.Command{
 			app.NewPlant("Example8", "A dummy package for testing terminal development", "hi", "hi"),
 
 		}
-		m := app.NewModel(list.New(items, list.NewDefaultDelegate(), 0, 0))
+		m := app.BrowseModal(list.New(items, list.NewDefaultDelegate(), 0, 0))
 		m.List.Title = "Your Grove"
 		p := tea.NewProgram(m, tea.WithAltScreen())
 		if err := p.Start(); err != nil {

@@ -27,13 +27,3 @@ func NewPlant(title, desc, author, website string) Plant {
 
 // https://docs.brew.sh/Manpage
 
-
-type groveConfig struct {
-	GroveURL string `json:"groveURL"`
-}
-
-func DefaultGroveConfig() groveConfig {
-	return groveConfig{
-		GroveURL: "https://grove.sbs/",
-	}
-}

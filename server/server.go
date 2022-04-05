@@ -1,15 +1,17 @@
 package server
 
 import (
+	
 	"log"
 	"net/url"
+	"os"
 
 	"github.com/charmbracelet/charm/kv"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 )
 
-func Start() error {
+func Start(allowed_proxies []string) error {
 	db, err := kv.OpenWithDefaults("grove")
 	if err != nil {
 		log.Fatal(err)
@@ -22,11 +24,13 @@ func Start() error {
 	router := gin.Default()
 
 	router.Use(gin.Recovery())
-	// router.SetTrustedProxies([]string{"0.0.0.0"})
+	router.SetTrustedProxies(allowed_proxies)
 	//Routes
-	router.GET("/plants/:package", func(ctx *gin.Context) {
+	router.GET("/plants/:package/:version", func(ctx *gin.Context) {
 		pk := url.QueryEscape(ctx.Param("package"))
-		data, err := db.Get([]byte(pk))
+		version := url.QueryEscape(ctx.Param("version"))
+		log.Print(pk, "@", version)
+		data, err := db.Get([]byte(pk + "@" + version))
 		if err != nil {
 			ctx.AbortWithError(503, err)
 			return
@@ -34,7 +38,7 @@ func Start() error {
 		ctx.Data(200, "application/octet-stream", data)
 	})
 
-	router.Run(":8080")
+	router.Run(":" + os.Getenv("GROVE_SERVER_PORT"))
 
 	return nil
 }

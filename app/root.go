@@ -8,7 +8,7 @@ type groveConfig struct {
 }
 
 type groveServerConfig struct {
-	// RedisIP string `json:"redisIp"`
+	AllowedProxies []string `json:"allowed_proxies"`
 
 }
 

@@ -37,7 +37,7 @@ var install *cobra.Command = &cobra.Command{
 // on specifies where Grove should plant a new package. It defaults to "localhost" which just means your machine.
 var on string
 
-// groveInstall talks to a grove server instance and isntall the requested file if it exists or returns an app.NoPackageFound error
+// groveInstall talks to a grove server instance and install the requested file if it exists or returns an app.NoPackageFound error
 func groveInstall(path string) error {
 	if !strings.Contains(path, "/") {
 		return errors.New("error: install path requires <name>/<version> format.")
@@ -70,7 +70,7 @@ func groveInstall(path string) error {
 	return nil
 }
 
-// gitInstall is currently defunct. Will implement at a later date.
+// gitInstall install a git directory to disk.
 func gitInstall(path string) error {
 	// https://github.com/go-git/go-git/blob/master/_examples/clone/main.go
 	sep_path := strings.Split(path, "/")

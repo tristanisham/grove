@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 )
-
+//Start begins the webserver in the 'server' module.
 func Start(allowed_proxies []string) error {
 	db, err := kv.OpenWithDefaults("grove")
 	if err != nil {

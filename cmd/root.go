@@ -14,7 +14,6 @@ import (
 
 
 
-
 var rootCmd = &cobra.Command{
 	Use:   "grove",
 	Short: "Grove is a modern package manager and software installer",
@@ -51,6 +50,7 @@ func initConfig() {
 	viper.AddConfigPath(home + "/.grove")
 	viper.SetConfigName("config")
 	viper.SetDefault("groveURL", "https://grove.sbs/")
+	
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired

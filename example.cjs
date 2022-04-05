@@ -7,7 +7,9 @@ const Description = "";
 const Homepage = "";
 const License = "";
 const sha256 = "";
+const URL = liveCheck();
 
-function liveUpdate() {
+function liveCheck() {
     return `https://papermc.io/api/v2/projects/paper/versions/${versionNum}/builds/${buildNum}/downloads/paper-${versionNum}-${buildNum}.jar`
 }
+

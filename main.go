@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+	//Cobra is surprisingly slow.
 	cmd.Execute();
 }
 

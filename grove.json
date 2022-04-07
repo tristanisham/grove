@@ -1,11 +1,13 @@
 {
-    "name": "",
-    "description": "",
-    "homepage": "",
-    "license": "",
+    "name": "openjdk",
+    "description": "production-ready open-source builds of the Java Development Kit, version 18, an implementation of the Java SE 18 Platform under the GNU General Public License, version 2, with the Classpath Exception.",
+    "homepage": "https://jdk.java.net/",
+    "license": " GPL2, with the Classpath Exception",
     "sha256": {
-        "x86_linux": ""
+        "x86_linux": "dff2860ba24c3f70f32ad3ac9b03f768dd28044bbda87c9607654fd03795c2ab"
     },
-    "url": "",
-    "version": ""
+    "url": {
+        "x86_linux": "https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-aarch64_bin.tar.gz"
+    },
+    "version": "18"
 }

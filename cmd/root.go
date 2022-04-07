@@ -10,6 +10,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
+
 // AllowedServerProxies defines which real IPs Grove's webserver expects if you host it behind a proxy.
 var AllowedServerProxies []string
 var rootCmd = &cobra.Command{
@@ -42,15 +43,18 @@ func initConfig() {
 
 	if _, err := os.Stat(home + "/.grove"); os.IsNotExist(err) {
 		os.MkdirAll(home+"/.grove", 0775)
+		os.MkdirAll(home+"/.grove/packages", 0775)
 	}
-
+	//Bug(tristan): I need to redo this whole thing wihtout viper
 	viper.AddConfigPath(home + "/.grove")
 	viper.SetConfigName("config")
 	viper.SetDefault("groveURL", "https://grove.sbs/")
 	viper.SetDefault("allowed_proxies", []string{"0.0.0.0"})
+	viper.SetDefault("packages_dir", home+"/.grove/packages/")
 	if val := viper.GetString("groveURL"); len(val) == 0 {
 		os.Setenv("GROVE_REPO", val)
 	}
+	os.Setenv("GROVE_PKG_DIR", home+"/.grove/packages/")
 	AllowedServerProxies = viper.GetStringSlice("allowed_proxies")
 
 	if err := viper.ReadInConfig(); err != nil {

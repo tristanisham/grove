@@ -1,5 +1,11 @@
 package app
 
+import (
+	"log"
+
+	"github.com/mitchellh/go-homedir"
+)
+
 
 type groveConfig struct {
 	GroveURL string `json:"groveURL"`
@@ -9,11 +15,20 @@ type groveConfig struct {
 
 type groveServerConfig struct {
 	AllowedProxies []string `json:"allowed_proxies"`
+	PackagesDirectory string `json:"packages_dir"`
 
 }
 
 func DefaultGroveConfig() groveConfig {
+	home, err := homedir.Dir()
+	if err != nil {
+		log.Fatal(err)
+	}
 	return groveConfig{
 		GroveURL: "https://grove.sbs/",
+		Server:   groveServerConfig{
+			AllowedProxies:    []string{"0.0.0.0"},
+			PackagesDirectory: home+"/.grove/packages/",
+		},
 	}
 }
